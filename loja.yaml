@@ -1,0 +1,183 @@
+openapi: 3.0.0
+info:
+  title: Loja API
+  version: 1.0.0
+  description: API para gerenciamento de clientes, produtos, itens e cestas.
+
+servers:
+  - url: http://localhost:8888
+
+paths:
+  /api/cliente:
+    post:
+      summary: Gravar cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '200':
+          description: Cliente salvo corretamente
+    put:
+      summary: Alterar cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '200':
+          description: Cliente alterado corretamente
+
+  /api/cliente/{codigo}:
+    get:
+      summary: Carregar cliente
+      parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cliente carregado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+    delete:
+      summary: Remover cliente
+      parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cliente removido com sucesso
+
+  /api/clientes:
+    get:
+      summary: Listar clientes
+      responses:
+        '200':
+          description: Lista de clientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+
+  /api/produto:
+    post:
+      summary: Gravar produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        '200':
+          description: Produto salvo corretamente
+    put:
+      summary: Alterar produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        '200':
+          description: Produto alterado corretamente
+
+  /api/produto/{codigo}:
+    get:
+      summary: Carregar produto
+      parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Produto carregado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+    delete:
+      summary: Remover produto
+      parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Produto removido com sucesso
+
+  /api/produtos:
+    get:
+      summary: Listar produtos
+      responses:
+        '200':
+          description: Lista de produtos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produto'
+
+components:
+  schemas:
+    Cliente:
+      type: object
+      properties:
+        codigo:
+          type: integer
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        telefone:
+          type: string
+        documento:
+          type: string
+        logradouro:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        uf:
+          type: string
+
+    Produto:
+      type: object
+      properties:
+        codigo:
+          type: integer
+        nome:
+          type: string
+        descritivo:
+          type: string
+        valor:
+          type: string
+        quantidade:
+          type: string
+        keywords:
+          type: string
+        destaque:
+          type: integer
